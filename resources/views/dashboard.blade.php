@@ -197,7 +197,7 @@
                                                 {{ '0' }}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ '-' }}
+                                                {{ $url->company->name }}
                                             </td>
 
                                             <td class="px-6 py-4">
@@ -569,7 +569,7 @@
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="text-lg font-semibold">Generated Sort Urls</h4>
                             @auth
-                                @if (auth()->user()->isAdmin())
+                                @if (auth()->user()->isAdmin() || auth()->user()->isMember())
                                     <a href="{{ route('short-url.create') }}"
                                         class="text-white bg-green-400 hover:bg-green-500
                       focus:ring-4 focus:ring-green-300
@@ -580,17 +580,15 @@
                                 @endif
                             @endauth
 
-                            @auth
-                                @if (auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
-                                    <a href="#"
-                                        class="text-white bg-gray-800 hover:bg-gray-700
+
+                            <a href="#"
+                                class="text-white bg-gray-800 hover:bg-gray-700
                       focus:ring-4 focus:ring-gray-600
                       font-medium rounded text-sm px-4 py-2.5
                       focus:outline-none">
-                                        Download
-                                    </a>
-                                @endif
-                            @endauth
+                                Download
+                            </a>
+
                         </div>
 
                         <div

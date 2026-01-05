@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ShortUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class ShortUrlController extends Controller
 {
@@ -32,6 +33,8 @@ class ShortUrlController extends Controller
      */
     public function create()
     {
+        // $this->authorize('create', ShortUrl::class);
+        Gate::authorize('create', ShortUrl::class);
         return view('shorturl.create');
     }
 
@@ -40,6 +43,7 @@ class ShortUrlController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', ShortUrl::class);
         $user = auth()->user();
 
         $request->validate([

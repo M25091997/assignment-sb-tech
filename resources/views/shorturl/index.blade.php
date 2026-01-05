@@ -74,7 +74,7 @@
                                 </td>
 
                                 <td class="px-6 py-4">
-                                    {{ '-' }}
+                                    {{ $url->company->name }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $url->created_at->format('d M Y') }}

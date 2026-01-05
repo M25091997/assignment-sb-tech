@@ -22,8 +22,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // custom routes
-    Route::get('/r/{code}', [ShortUrlRedirectController::class, 'redirect'])
-        ->name('short-url.redirect');
+
+    // Auth Resolvable
+    // Route::get('/r/{code}', [ShortUrlRedirectController::class, 'redirect'])
+    //     ->name('short-url.redirect');
 
 
     Route::get('invite/list', [UserControler::class, 'index'])->name('invite.index');
@@ -36,8 +38,12 @@ Route::middleware('auth')->group(function () {
 });
 
 // Publicly Resolvable
+// Route::get('/pr/{code}', [ShortUrlRedirectController::class, 'publiclyRedirect'])
+//     ->name('short-url.public')->middleware('throttle:60,1');
+
+// Publicly Resolvable
 Route::get('/r/{code}', [ShortUrlRedirectController::class, 'publiclyRedirect'])
-    ->name('short-url.public')->middleware('throttle:60,1');
+    ->name('short-url.redirect')->middleware('throttle:60,1');
 
 
 require __DIR__ . '/auth.php';

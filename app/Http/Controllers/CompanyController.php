@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CompanyController extends Controller
 {
@@ -22,6 +23,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        // $this->authorize('create', Company::class);
+        Gate::authorize('create', Company::class);
         return view('companies.create');
     }
 
@@ -30,6 +33,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Company::class);
         $validated = $request->validate([
             'name'  => 'required|string|max:255',
             'code'  => 'nullable|string|max:50|unique:companies',

@@ -42,6 +42,7 @@ class UserControler extends Controller
         if ($user->isAdmin()) {
             $rules['role'] = 'required|in:member,admin';
         }
+
         if ($user->isSuperAdmin()) {
             $rules['company_id'] = 'required|exists:companies,id';
         }
