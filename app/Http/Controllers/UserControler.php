@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 class UserControler extends Controller
 {
@@ -24,6 +25,8 @@ class UserControler extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', User::class);
+
         return view('invite.create');
     }
 
@@ -32,6 +35,8 @@ class UserControler extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', User::class);
+
         $user = auth()->user();
         $rules = [
             'name'  => 'required|string|max:255',
